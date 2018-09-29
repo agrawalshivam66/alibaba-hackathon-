@@ -1,11 +1,4 @@
 import nltk
-from nltk.corpus import movie_reviews
-from nltk.classify.scikitlearn import SklearnClassifier
-from sklearn.naive_bayes import MultinomialNB, BernoulliNB
-from sklearn.linear_model import LogisticRegression, SGDClassifier
-from sklearn.svm import SVC, LinearSVC, NuSVC
-from nltk.classify import ClassifierI
-from statistics import mode
 from nltk.tokenize import sent_tokenize, word_tokenize
 import string
 import numpy as np
@@ -66,12 +59,25 @@ X = cv.fit_transform(final_feature).toarray()
 
 X_test = cv.transform(feature_test).toarray()
 
-#X=X.reshape(-1, 1)
+
 from sklearn.naive_bayes import GaussianNB
 clf = GaussianNB()
 clf.fit(X[:9900], label_train[:9900])
 arr=clf.predict(X_test)
 print(clf.score(X[9001:],label_train[9001:]))
+
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
+clf2 = AdaBoostClassifier()
+clf2.fit(X[:9900], label_train[:9900])
+arr=clf2.predict(X_test)
+print(clf2.score(X[9001:],label_train[9001:]))
+
+from sklearn import tree
+clf4 = tree.DecisionTreeClassifier(min_samples_split=40)
+clf4.fit(X[:9900], label_train[:9900])
+arr=clf4.predict(X_test)
+print(clf4.score(X[9001:],label_train[9001:]))
+
 file=open("SPS.txt", "w",encoding='utf-8')
 for i in arr:
     if i==1:
