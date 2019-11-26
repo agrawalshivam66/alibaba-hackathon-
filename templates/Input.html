@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+        <head>
+                <meta charset="UTF-8">
+                <title>Sentiment Analysis</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link href='https://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+        <style type="text/css">
+        
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto";
+  font-size: 14px;
+  background-size: 200% 100% !important;
+  -webkit-animation: move 10s ease infinite;
+          animation: move 10s ease infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  background: linear-gradient(45deg, #49D49D 10%, #A2C7E5 90%);
+  height: 100vh;
+}
+
+.user {
+  width: 90%;
+  max-width: 340px;
+  margin: 10vh auto;
+}
+
+.user__header {
+  text-align: center;
+  opacity: 0;
+  -webkit-transform: translate3d(0, 500px, 0);
+          transform: translate3d(0, 500px, 0);
+  -webkit-animation: arrive 500ms ease-in-out 0.7s forwards;
+          animation: arrive 500ms ease-in-out 0.7s forwards;
+}
+
+.user__title {
+  font-size: 14px;
+  margin-bottom: -10px;
+  font-weight: 500;
+  color: white;
+}
+
+.form {
+  margin-top: 40px;
+  border-radius: 6px;
+  overflow: hidden;
+  opacity: 0;
+  -webkit-transform: translate3d(0, 500px, 0);
+          transform: translate3d(0, 500px, 0);
+  -webkit-animation: arrive 500ms ease-in-out 0.9s forwards;
+          animation: arrive 500ms ease-in-out 0.9s forwards;
+}
+
+.form--no {
+  -webkit-animation: NO 1s ease-in-out;
+          animation: NO 1s ease-in-out;
+  opacity: 1;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+.form__input {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  font-family: "Roboto";
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  transition: 0.3s;
+}
+.form__input:focus {
+  background: #f7f7f7;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  font-family: "Roboto";
+  -webkit-appearance: none;
+  outline: 0;
+  border: 0;
+  color: white;
+  background: #ABA194;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #a09486;
+}
+
+@-webkit-keyframes NO {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes NO {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+@-webkit-keyframes arrive {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 50px, 0);
+            transform: translate3d(0, 50px, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes arrive {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 50px, 0);
+            transform: translate3d(0, 50px, 0);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}
+@-webkit-keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+        </style>                
+                
+        </head>
+   <body>
+   
+     
+      
+
+      <div class="user">
+        <header class="user__header">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3219/logo.svg" alt="" />
+            
+        </header>
+        
+        <form class="form" action = "http://localhost:8080/result" method = "POST">
+            
+            <div class="form__group">
+                <input type="text" placeholder="Text" name="Text" class="form__input" />
+            </div>
+            
+            <!-- <p><input type = "submit" value = "submit" /> </p> -->
+            <button class="btn" type="submit"  value="submit">Predict</button>
+        </form>
+    </div>
+
+   </body>
+</html>
+
+
+<!-- <form action = "http://localhost:8080/result" method = "POST">
+         <p>Gene <input type = "text" name = "Gene" /></p>
+         <p>Variation <input type = "text" name = "Variation" /></p>
+         <p>Text <input type = "text" name = "Text" /></p>
+
+         <p><input type = "submit" value = "submit" /></p>
+      </form> -->
